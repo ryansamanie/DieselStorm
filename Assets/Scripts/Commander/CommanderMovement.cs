@@ -35,10 +35,11 @@ public class CommanderMovement : MovementBehaviour {
 
     public override void Move(float m_hinput, float m_vinput, float m_jinput)
     {
+        float aero = Vector3.Dot(transform.forward, m_body.velocity.normalized);
 
         Vector3 movevec = new Vector3(m_hinput * m_moveForce * m_body.angularVelocity.magnitude * 2, 
             m_jinput * m_liftForce, m_vinput * m_moveForce);
-        Vector3 turnvec = new Vector3(0, m_hinput * m_body.velocity.magnitude * m_turnForce, 0);
+        Vector3 turnvec = new Vector3(0, m_hinput * aero * m_body.velocity.magnitude * m_turnForce, 0);
         m_body.AddRelativeForce(movevec);
         m_body.AddRelativeTorque(turnvec);
     }
@@ -47,8 +48,8 @@ public class CommanderMovement : MovementBehaviour {
     {
         //Checks if the ship is below or above limits
         if (m_body.position.y < m_minHeight)
-            m_body.AddForce(0, 5, 0);
+            m_body.AddForce(0, 30, 0);
         else if (m_body.position.y > m_maxHeight)
-            m_body.AddForce(0, -5, 0);
+            m_body.AddForce(0, -30, 0);
     }
 }

@@ -32,6 +32,8 @@ public class CameraFollow : MonoBehaviour {
 
     void FixedUpdate()
     {
+        m_offset -= Input.GetAxis("Mouse ScrollWheel") * 10;
+
         if (target == null)
             return;
 
@@ -44,7 +46,7 @@ public class CameraFollow : MonoBehaviour {
         //Quaternion smoothRotate = Quaternion.Lerp(transform.rotation, target.rotation, smoothSpeed);
 
         transform.position = smoothMove;
-        
+
         transform.LookAt(target.position + new Vector3(0,4,0), Vector3.up);
     }
 }
