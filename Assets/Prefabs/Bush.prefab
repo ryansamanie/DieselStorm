@@ -22,12 +22,13 @@ GameObject:
   - component: {fileID: 193858056703293730}
   - component: {fileID: 33482653929797322}
   - component: {fileID: 23914874104810564}
+  - component: {fileID: 136072767250414902}
   m_Layer: 0
   m_Name: Bush
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &4449058908431954
 Transform:
@@ -84,6 +85,19 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1846792921534662}
   m_Mesh: {fileID: 43557191592365534, guid: 99a6a2b0f7dce6841b9014e6d567dd8e, type: 2}
+--- !u!136 &136072767250414902
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1846792921534662}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.53
+  m_Height: 3.66
+  m_Direction: 1
+  m_Center: {x: 0.08, y: -0.04, z: 0.02}
 --- !u!193 &193858056703293730
 Tree:
   m_ObjectHideFlags: 1
