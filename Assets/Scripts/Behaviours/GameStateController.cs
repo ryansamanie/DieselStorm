@@ -17,8 +17,7 @@ public class GameStateController : MonoBehaviour
             Debug.LogError("No initial state set");
         m_CurrentState.OnEnter();
 
-        SceneManager.sceneLoaded += SceneLoaded;
-        
+        SceneManager.sceneLoaded += SceneLoaded;        
     }
 
     void TransitionToState(Object[] args)
@@ -30,18 +29,23 @@ public class GameStateController : MonoBehaviour
         m_CurrentState = sender.TryTransition(toState) ? toState : m_CurrentState;
         if (m_CurrentState == toState)
         {
+            m_CurrentState.OnEnter();
             sender.OnExit();
-            m_CurrentState.OnEnter();            
+            if (m_CurrentState.GetType() == typeof(MatchLoadStateScriptable))
+            {
+                var state = m_CurrentState as MatchLoadStateScriptable;
+                StartCoroutine(state.StateSwitchDelay());
+            }            
         }
     }    
     
     public void SceneLoaded(Scene cur, LoadSceneMode mode)
     {
-        if (cur.name == "1.Game-Play")
-        {
-            TransitionToState(new Object[] { m_CurrentState, m_States[3] });
-            return;
-        }
+        //if (cur.name == "1.Game-Play")
+        //{
+        //    TransitionToState(new Object[] { m_CurrentState, m_States[3] });
+        //    return;
+        //}
         if (cur.name == "0.lobby")
         {
             TransitionToState(new Object[] { m_CurrentState, m_States[1] });
@@ -57,5 +61,10 @@ public class GameStateController : MonoBehaviour
     public void TransitionToEnd(Object[] args)
     {
         TransitionToState(new Object[] { m_CurrentState, m_States[2] });
+    }
+
+    public void TransitionToLoad(Object[] args)
+    {        
+        TransitionToState(new Object[] { m_CurrentState, m_States[3] });
     }
 }

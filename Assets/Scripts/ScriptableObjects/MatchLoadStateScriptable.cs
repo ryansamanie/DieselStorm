@@ -10,6 +10,12 @@ public class MatchLoadStateScriptable : StateScriptable
         m_OnStateEntered.Raise(this);
     }
 
+    public IEnumerator StateSwitchDelay()
+    {
+        yield return new WaitForSeconds(2.0f);
+        m_OnStateEntered.Raise(this);
+    }
+
     public override void OnExit()
     {
         m_OnStateExit.Raise(this);

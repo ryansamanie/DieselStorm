@@ -48,7 +48,7 @@ public class ScoreBehaviour : NetworkBehaviour
     [Command]
     void CmdVictoryCheck()
     {
-        Debug.Log("Checking For Victory");
+        //Debug.Log("Checking For Victory");
         int teamsWithTickets = 0;
         foreach (var team in m_Teams)
         {

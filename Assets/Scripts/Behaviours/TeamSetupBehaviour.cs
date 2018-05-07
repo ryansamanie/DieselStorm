@@ -13,8 +13,15 @@ public class TeamSetupBehaviour : NetworkBehaviour
     public TeamSetupSingleton m_TeamSetupSingleton;
     public TeamSriptable m_TeamConfig;
     public GameObject m_TeamObject;
-    
-    private void Start()
+    public GameEventArgs m_OnSetupComplete;
+    public GameEventArgs m_OnReadyForSetup;
+
+    void Start()
+    {
+        m_OnReadyForSetup.Raise(this);
+    }
+
+    public void InitializeSetup(Object[] args)
     {
         CmdCreateTeams();
         m_TeamSetupSingleton.m_Players = new List<PlayerBehaviour>();
@@ -54,5 +61,6 @@ public class TeamSetupBehaviour : NetworkBehaviour
                 NetworkServer.Spawn(teamObj);                             
             }
         }
+        m_OnSetupComplete.Raise(this);
     }
 }

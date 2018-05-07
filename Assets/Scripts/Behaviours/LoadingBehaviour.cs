@@ -27,7 +27,7 @@ public class LoadingBehaviour : NetworkBehaviour
         //    //playerLoaded = FindObjectsOfType<NetworkTankInputController>().Length;   
         //    //m_OnLoadPercentChange.Raise(this);         
         //}
-        yield return new WaitForSeconds(2.0f);
-        m_LoadComplete.Raise(this);        
+        yield return new WaitForSeconds(0.1f);
+        //m_LoadComplete.Raise(this);        
     }
 }
