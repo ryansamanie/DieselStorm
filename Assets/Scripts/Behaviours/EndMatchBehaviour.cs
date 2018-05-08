@@ -10,8 +10,8 @@ public class EndMatchBehaviour : MonoBehaviour
 
     public void StartMatchTimer(Object[] args)
     {
-        if (args[0] as MatchEndStateScriptable == m_EndMatchScriptable)
-            StartCoroutine(EndMatchTimer());
+        //if (args[0] as MatchEndStateScriptable == m_EndMatchScriptable)
+        StartCoroutine(EndMatchTimer());
     }
 
     IEnumerator EndMatchTimer()

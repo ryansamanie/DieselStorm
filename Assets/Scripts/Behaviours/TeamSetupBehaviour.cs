@@ -23,6 +23,7 @@ public class TeamSetupBehaviour : NetworkBehaviour
 
     public void InitializeSetup(Object[] args)
     {
+        //m_TeamSetupSingleton.ClearTeams();
         CmdCreateTeams();
         m_TeamSetupSingleton.m_Players = new List<PlayerBehaviour>();
         StartCoroutine(GetPlayers());
@@ -45,11 +46,15 @@ public class TeamSetupBehaviour : NetworkBehaviour
     [Command]
     void CmdCreateTeams()
     {
+        m_TeamSetupSingleton.m_Teams = new List<TeamSriptable>();
+        m_TeamSetupSingleton.m_TeamColors = new List<Color>();
         for (int i = 0; i < m_TeamSetupSingleton.m_MaxTeams; i++)
         {
             var newTeam = m_TeamConfig.CreateInstance();            
             if (m_TeamSetupSingleton.AddTeam(newTeam))
             {
+                if(GameObject.Find("Name" + i) != null)
+                    break;
                 var teamObj = Instantiate(m_TeamObject);
                 var teamBeahviour = teamObj.GetComponent<TeamBehaviour>();
                 teamBeahviour.m_TeamScriptable = newTeam;
@@ -61,6 +66,12 @@ public class TeamSetupBehaviour : NetworkBehaviour
                 NetworkServer.Spawn(teamObj);                             
             }
         }
-        m_OnSetupComplete.Raise(this);
+        StartCoroutine(SetUptimer());
+    }
+
+    IEnumerator SetUptimer()
+    {
+        yield return new WaitForSeconds(6.0f);
+        m_OnSetupComplete.Raise(this);        
     }
 }

@@ -52,4 +52,9 @@ public class TeamSriptable : ScriptableObject
         if (m_Players.Count == 0)
             m_OnAllPlayerLeftTeam.Raise(this);
     }
+
+    public void Clear()
+    {
+        m_Players = new List<PlayerBehaviour>();
+    }
 }

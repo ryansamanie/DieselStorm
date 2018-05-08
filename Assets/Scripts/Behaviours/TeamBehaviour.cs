@@ -22,6 +22,8 @@ public class TeamBehaviour : NetworkBehaviour
         if (m_TeamScriptable == null)
             return;
         StartCoroutine(InitalSpawn());
+        //m_PlayerRespawn.Raise(this);
+        m_SpawnLocation = FindObjectOfType<SpawnPointController>().m_SpawnPoints[0].transform;
         m_TeamColor = m_TeamScriptable.Color;      
     }
 

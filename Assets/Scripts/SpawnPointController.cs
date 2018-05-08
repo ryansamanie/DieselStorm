@@ -40,6 +40,8 @@ public class SpawnPointController : NetworkBehaviour
 
     IEnumerator GetSpawnPoints()
     {
+        if (m_SpawnPoints.Count <= 0)
+            yield return new WaitForSeconds(0.1f);
         while (true)
         {
             yield return new WaitForSeconds(0.5f);

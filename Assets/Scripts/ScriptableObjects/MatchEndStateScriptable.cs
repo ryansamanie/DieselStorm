@@ -7,7 +7,7 @@ public class MatchEndStateScriptable : StateScriptable
 {    
     public override void OnEnter()
     {
-        
+        m_OnStateEntered.Raise(this);
     }
 
     IEnumerator EnterStateDelay()
@@ -20,15 +20,20 @@ public class MatchEndStateScriptable : StateScriptable
     {        
         m_OnStateExit.Raise(this);
         var teams = FindObjectsOfType<TeamBehaviour>();
-        var players = FindObjectsOfType<PlayerBehaviour>();
+        //var players = FindObjectsOfType<PlayerBehaviour>();
+        var tanks = FindObjectsOfType<NetworkTankInputController>();
         for (int i = 0; i < teams.Length; i++)
         {
             Destroy(teams[i].gameObject);
         }
 
-        for (int i = 0; i < players.Length; i++)
+        //for (int i = 0; i < players.Length; i++)
+        //{
+        //    Destroy(players[i].gameObject);
+        //}
+        for (int i = 0; i < tanks.Length; i++)
         {
-            Destroy(players[i].gameObject);
+            Destroy(tanks[i].gameObject);
         }
     }
 }

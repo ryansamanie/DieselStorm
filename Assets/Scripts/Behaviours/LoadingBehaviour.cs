@@ -17,7 +17,7 @@ public class LoadingBehaviour : NetworkBehaviour
 
     IEnumerator Loading()
     {        
-        var numConnected = FindObjectOfType<LobbyManager>().numPlayers;
+        //var numConnected = FindObjectOfType<LobbyManager>().numPlayers;
         var playerLoaded = FindObjectsOfType<NetworkTankInputController>().Length;
         //while (playerLoaded < numConnected)
         //{
