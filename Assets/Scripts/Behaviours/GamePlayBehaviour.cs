@@ -18,5 +18,6 @@ public class GamePlayBehaviour : NetworkBehaviour
     {
         yield return new WaitForSeconds(m_GamePlayTimer);
         m_GamePlayOver.Raise(this);
+        StopCoroutine(GamePlayTimer());
     }
 }

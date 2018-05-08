@@ -10,11 +10,11 @@ public class LobbyStateScriptable : StateScriptable
     public override void OnEnter()
     {
         m_OnStateEntered.Raise(this);
-        if (SceneManager.GetActiveScene().name != "0.lobby")
-        {
-            SceneManager.LoadScene("0.lobby");
-        }
-        ClearPlayers();
+        //if (SceneManager.GetActiveScene().name != "0.lobby")
+        //{
+        //    SceneManager.LoadScene("0.lobby");
+        //}
+        //ClearPlayers();
     }
 
     public override void OnExit()

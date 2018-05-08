@@ -6,7 +6,7 @@ using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 using Object = UnityEngine.Object;
 
-public class GameStateController : MonoBehaviour
+public class GameStateController : NetworkBehaviour
 {
     public List<StateScriptable> m_States;
     public StateScriptable m_CurrentState;    
@@ -46,11 +46,11 @@ public class GameStateController : MonoBehaviour
         //    TransitionToState(new Object[] { m_CurrentState, m_States[3] });
         //    return;
         //}
-        if (cur.name == "0.lobby")
-        {
-            TransitionToState(new Object[] { m_CurrentState, m_States[1] });
-            return;
-        }
+        //if (cur.name == "0.lobby")
+        //{
+        //    TransitionToState(new Object[] { m_CurrentState, m_States[1] });
+        //    return;
+        //}
     }
 
     public void TransitionToGame(Object[] args)

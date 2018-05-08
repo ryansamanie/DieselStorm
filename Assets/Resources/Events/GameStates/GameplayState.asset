@@ -13,6 +13,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Transitions:
   - {fileID: 11400000, guid: e98198e617ebbc34fbbf8bcdb15fafe1, type: 2}
-  - {fileID: 11400000, guid: bf44885363e27d149bc36a40f979d497, type: 2}
+  - {fileID: 0}
   m_OnStateEntered: {fileID: 11400000, guid: 146008e1d9727584fb51cb66b104355a, type: 2}
   m_OnStateExit: {fileID: 11400000, guid: c252bdb6dcb06e047b49e23a7ae5a00d, type: 2}

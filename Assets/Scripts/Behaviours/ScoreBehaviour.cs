@@ -10,8 +10,10 @@ public class ScoreBehaviour : NetworkBehaviour
     public GameEventArgs m_OnTeamsSorted;
     public GameEventArgs m_OnWinCondition;
 
-    void Start()
+
+    public void Reset(Object[] args)
     {
+        m_Teams = new List<TeamBehaviour>();
         StartCoroutine(GetTeams());
     }
 

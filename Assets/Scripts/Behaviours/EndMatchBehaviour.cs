@@ -18,5 +18,6 @@ public class EndMatchBehaviour : MonoBehaviour
     {
         yield return new WaitForSeconds(m_TimerDuration);
         m_OnTimerComplete.Raise(this);
+        StopCoroutine(EndMatchTimer());
     }
 }

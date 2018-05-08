@@ -15,15 +15,17 @@ public class TeamBehaviour : NetworkBehaviour
     [SyncVar] public int m_MaxPlayers;
     [SyncVar] public GameObject m_HeavyTankPrefab;
     [SyncVar] public GameObject m_LightTankPrefab;
+    private bool InitalSet = false;
 
 
     void Start()
     {
         if (m_TeamScriptable == null)
             return;
-        StartCoroutine(InitalSpawn());
+        //if(!InitalSet)
+        //    StartCoroutine(InitalSpawn());
         //m_PlayerRespawn.Raise(this);
-        m_SpawnLocation = FindObjectOfType<SpawnPointController>().m_SpawnPoints[0].transform;
+        m_SpawnLocation = FindObjectOfType<SpawnPointController>().m_SpawnPoints[Random.Range(0,5)].transform;
         m_TeamColor = m_TeamScriptable.Color;      
     }
 
@@ -77,13 +79,17 @@ public class TeamBehaviour : NetworkBehaviour
         m_PlayerRespawn.Raise(this, m_RespawningPlayer, m_SpawnLocation, tank);
         m_TicketsRemaining--;
         m_OnTicketsRemaingChanged.Raise(this);
-        if(m_TicketsRemaining <= 0)
+        if (m_TicketsRemaining <= 0)
+        {
             m_OnTicketsDepleted.Raise(this);
+            InitalSet = false;
+        }
         m_RespawningPlayer = null;
     }
 
-    IEnumerator InitalSpawn()
+    public IEnumerator InitalSpawn()
     {
+        InitalSet = true;
         while (true)
         {
             yield return new WaitForSeconds(3.0f);
@@ -103,6 +109,7 @@ public class TeamBehaviour : NetworkBehaviour
             }
             break;
         }
+        StopCoroutine(InitalSpawn());
     }
 
     public void SetSpawnPoint(Object[] args)
