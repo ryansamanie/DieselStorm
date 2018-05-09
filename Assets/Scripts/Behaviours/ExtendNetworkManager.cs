@@ -23,8 +23,7 @@ public class ExtendNetworkManager : NetworkManager
 
     //Detect when a client connects to the Server
     public override void OnServerDisconnect(NetworkConnection connection)
-    {
-        base.OnServerDisconnect(connection);
+    {        
         foreach (var con in m_Connections)
         {
             if (con.Value.connectionToClient.connectionId == connection.connectionId)
@@ -34,6 +33,7 @@ public class ExtendNetworkManager : NetworkManager
                 m_Connections.Remove(con.Key);
             }
         }
+        base.OnServerDisconnect(connection);
     }
 
     IEnumerator SearchForController()

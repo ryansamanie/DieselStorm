@@ -479,6 +479,7 @@ GameObject:
   - component: {fileID: 85455159}
   - component: {fileID: 85455158}
   - component: {fileID: 85455155}
+  - component: {fileID: 85455164}
   m_Layer: 0
   m_Name: Green
   m_TagString: Untagged
@@ -497,6 +498,7 @@ GameObject:
   - component: {fileID: 85455161}
   - component: {fileID: 85455160}
   - component: {fileID: 85455156}
+  - component: {fileID: 85455165}
   m_Layer: 0
   m_Name: Blue
   m_TagString: Untagged
@@ -515,6 +517,7 @@ GameObject:
   - component: {fileID: 85455163}
   - component: {fileID: 85455162}
   - component: {fileID: 85455157}
+  - component: {fileID: 85455166}
   m_Layer: 0
   m_Name: Red
   m_TagString: Untagged
@@ -632,6 +635,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Players: []
   m_TeamColor: {r: 0.11724126, g: 1, b: 0, a: 0}
+  m_StartingTeamLives: 3
+  m_CurrentTeamLives: 3
+  m_PlayerRespawn: {fileID: 11400000, guid: fc63c85cc0446b24d8a6bd24ec034179, type: 2}
 --- !u!4 &85455159
 Transform:
   m_ObjectHideFlags: 0
@@ -660,6 +666,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Players: []
   m_TeamColor: {r: 0, g: 0.006896496, b: 1, a: 0}
+  m_StartingTeamLives: 3
+  m_CurrentTeamLives: 3
+  m_PlayerRespawn: {fileID: 11400000, guid: fc63c85cc0446b24d8a6bd24ec034179, type: 2}
 --- !u!4 &85455161
 Transform:
   m_ObjectHideFlags: 0
@@ -688,6 +697,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Players: []
   m_TeamColor: {r: 1, g: 0, b: 0, a: 0}
+  m_StartingTeamLives: 3
+  m_CurrentTeamLives: 3
+  m_PlayerRespawn: {fileID: 11400000, guid: fc63c85cc0446b24d8a6bd24ec034179, type: 2}
 --- !u!4 &85455163
 Transform:
   m_ObjectHideFlags: 0
@@ -702,6 +714,93 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &85455164
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 85455152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3585c62ef44f14546b8830a61975bc4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: aebaca5ab213e3840a6e9c70f8a14102, type: 2}
+  Sender: {fileID: 0}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 85455158}
+        m_MethodName: PlayerDied
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: GameEventArgsResponse, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+--- !u!114 &85455165
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 85455153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3585c62ef44f14546b8830a61975bc4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: aebaca5ab213e3840a6e9c70f8a14102, type: 2}
+  Sender: {fileID: 0}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 85455158}
+        m_MethodName: PlayerDied
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: GameEventArgsResponse, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+--- !u!114 &85455166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 85455154}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3585c62ef44f14546b8830a61975bc4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: aebaca5ab213e3840a6e9c70f8a14102, type: 2}
+  Sender: {fileID: 0}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 85455158}
+        m_MethodName: PlayerDied
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: GameEventArgsResponse, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!1 &138834496
 GameObject:
   m_ObjectHideFlags: 0

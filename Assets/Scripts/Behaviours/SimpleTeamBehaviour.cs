@@ -7,6 +7,9 @@ public class SimpleTeamBehaviour : NetworkBehaviour
 {
     public List<SimplePlayerBehaviour> m_Players;
     [SyncVar]public Color m_TeamColor;
+    [SyncVar]public int m_StartingTeamLives;
+    [SyncVar]public int m_CurrentTeamLives;
+    public GameEventArgs m_PlayerRespawn;
     
     public void Add(SimplePlayerBehaviour player)
     {
@@ -14,11 +17,28 @@ public class SimpleTeamBehaviour : NetworkBehaviour
             return;
         if(m_Players.Contains(player))
             return;
-        m_Players.Add(player);
-        player.CmdSetTeamColor(m_TeamColor);
-        player.SpawnNewTank();                
+        m_Players.Add(player);   
+        CmdSpawnPlayer(player.gameObject);           
     }
-    
+
+    public void PlayerDied(Object[] args)
+    {
+        var player = args[0] as SimplePlayerBehaviour;
+        if (m_Players.Contains(player))
+        {
+            m_CurrentTeamLives--;
+            m_PlayerRespawn.Raise(player, this);
+        }
+    }
+
+    [Command]
+    public void CmdSpawnPlayer(GameObject player)
+    {
+        player.GetComponent<SimplePlayerBehaviour>().CmdSetTeamColor(m_TeamColor);
+        player.GetComponent<SimplePlayerBehaviour>().SpawnNewTank(new Object[] 
+        { player.GetComponent<SimplePlayerBehaviour>(), this});
+    }
+
     public void Remove(SimplePlayerBehaviour player)
     {
         if(!isServer)

@@ -44,7 +44,7 @@ public class TankStats : MonoBehaviour, IDamageable
             rt_Health.Apply(newModifier);
         }        
         else
-            rt_Health.Apply(modifier);
+            rt_Health.Apply(modifier);      
             
         m_TankStatsChanged.Raise(this);    
     }   
