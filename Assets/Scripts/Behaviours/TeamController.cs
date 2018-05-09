@@ -10,6 +10,8 @@ public class TeamController : NetworkBehaviour
 
     public void OnPlayerJoined(NetworkIdentity connectionIdentity)
     {
+        if(!isServer)
+            return;
         foreach (var player in FindObjectsOfType<SimplePlayerBehaviour>())
         {
             if (player.GetComponent<NetworkIdentity>() == connectionIdentity)
@@ -23,6 +25,8 @@ public class TeamController : NetworkBehaviour
 
     public void OnPlayerLeave(NetworkIdentity connectionIdentity)
     {
+        if (!isServer)
+            return;
         foreach (var team in m_Teams)
         {
             foreach (var player in FindObjectsOfType<SimplePlayerBehaviour>())

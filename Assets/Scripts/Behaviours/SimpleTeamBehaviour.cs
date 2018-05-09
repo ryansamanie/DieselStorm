@@ -10,16 +10,19 @@ public class SimpleTeamBehaviour : NetworkBehaviour
     
     public void Add(SimplePlayerBehaviour player)
     {
+        if(!isServer)
+            return;
         if(m_Players.Contains(player))
             return;
         m_Players.Add(player);
-        player.SpawnNewTank();
         player.CmdSetTeamColor(m_TeamColor);
-        //player.RpcSetTeamColor(m_TeamColor);
+        player.SpawnNewTank();                
     }
     
     public void Remove(SimplePlayerBehaviour player)
     {
+        if(!isServer)
+            return;
         if (m_Players.Contains(player))
             m_Players.Remove(player);
     }

@@ -18,7 +18,7 @@ public class ExtendNetworkManager : NetworkManager
         base.OnServerConnect(connection);
         if (m_TeamController == null)
             StartCoroutine(SearchForController());
-        StartCoroutine(ClientConnect(connection));       
+        StartCoroutine(ClientConnect(connection));
     }
 
     //Detect when a client connects to the Server

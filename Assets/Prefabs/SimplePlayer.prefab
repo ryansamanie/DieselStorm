@@ -88,4 +88,4 @@ MonoBehaviour:
     type: 2}
   m_rtTankObject: {fileID: 0}
   m_TeamColor: {r: 0, g: 0, b: 0, a: 0}
-  m_TankMaterial: {fileID: 0}
+  m_TankMaterial: {fileID: 2100000, guid: 04db8494eccaa134a80e6039d58e9116, type: 2}
