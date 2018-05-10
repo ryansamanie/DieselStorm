@@ -10,14 +10,21 @@ public class SimpleTeamBehaviour : NetworkBehaviour
     [SyncVar]public int m_StartingTeamLives;
     [SyncVar]public int m_CurrentTeamLives;
     public GameEventArgs m_PlayerRespawn;
-    
+    public bool m_PlayerOnTeam;
+
+    void Start()
+    {
+        m_CurrentTeamLives = m_StartingTeamLives;
+    }
+
     public void Add(SimplePlayerBehaviour player)
     {
         if(!isServer)
             return;
         if(m_Players.Contains(player))
             return;
-        m_Players.Add(player);   
+        m_Players.Add(player);
+        m_PlayerOnTeam = true;   
         CmdSpawnPlayer(player.gameObject);           
     }
 
@@ -27,7 +34,8 @@ public class SimpleTeamBehaviour : NetworkBehaviour
         if (m_Players.Contains(player))
         {
             m_CurrentTeamLives--;
-            m_PlayerRespawn.Raise(player, this);
+            if(m_CurrentTeamLives > 0)
+                m_PlayerRespawn.Raise(player, this);
         }
     }
 

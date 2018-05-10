@@ -39,7 +39,12 @@ public class SimplePlayerBehaviour : NetworkBehaviour
             return;
         m_Team = args[1] as SimpleTeamBehaviour;        
         StartCoroutine(RespawnDelay());
-        var newTank = Instantiate(m_TankObjectPrefab);
+        var spawnPosition = FindObjectsOfType<NetworkStartPosition>();
+        int numSpawns = spawnPosition.Length;
+        int spawnIndex = Random.Range(0, numSpawns);
+        var newTank = Instantiate(m_TankObjectPrefab, 
+            spawnPosition[spawnIndex].transform.position,
+            Quaternion.identity);
         NetworkServer.Spawn(newTank);
         m_rtTankObject = newTank;
         RpcSetTeamColor(m_rtTankObject, m_TeamColor);

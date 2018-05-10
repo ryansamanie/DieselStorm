@@ -12,6 +12,15 @@ public class ExtendNetworkManager : NetworkManager
     public Dictionary<string,NetworkIdentity> m_Connections = new Dictionary<string, NetworkIdentity>();
 
     public int m_PlayerConnected = 0;
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            GetComponent<NetworkManagerHUD>().showGUI = !GetComponent<NetworkManagerHUD>().showGUI;
+        }
+    }
+
     //Detect when a client connects to the Server
     public override void OnServerConnect(NetworkConnection connection)
     {
@@ -19,6 +28,7 @@ public class ExtendNetworkManager : NetworkManager
         if (m_TeamController == null)
             StartCoroutine(SearchForController());
         StartCoroutine(ClientConnect(connection));
+        GetComponent<NetworkManagerHUD>().showGUI = false;
     }
 
     //Detect when a client connects to the Server
@@ -33,6 +43,7 @@ public class ExtendNetworkManager : NetworkManager
                 m_Connections.Remove(con.Key);
             }
         }
+        GetComponent<NetworkManagerHUD>().showGUI = true;
         base.OnServerDisconnect(connection);
     }
 
@@ -44,7 +55,7 @@ public class ExtendNetworkManager : NetworkManager
 
     IEnumerator ClientConnect(NetworkConnection connection)
     {
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(1.0f);
         var netIDs = FindObjectsOfType<NetworkIdentity>();
         foreach (var id in netIDs)
         {
