@@ -8,8 +8,8 @@ public class SimpleScoreBehaviour : NetworkBehaviour
 {
     public TeamController m_TeamController;
     public List<SimpleTeamBehaviour> m_TeamsDefeated;
-    public int m_TeamRemaining;
-    public bool m_OnlyOneTeamRemaining;
+    [SyncVar]public int m_TeamRemaining;
+    [SyncVar]public bool m_OnlyOneTeamRemaining;
 
     void Awake()
     {

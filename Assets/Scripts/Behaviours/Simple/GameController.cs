@@ -6,15 +6,17 @@ using UnityEngine.Networking;
 public class GameController : NetworkBehaviour
 {
     public SimpleScoreBehaviour m_ScoreKeeper;
-    public bool m_AtLeastTwoFilledTeams;
+    public List<SimpleTeamBehaviour> m_Teams;
+    public SimpleUIController m_UIController;
+    [SyncVar]public bool m_AtLeastTwoFilledTeams;
 
     [Tooltip("timer for players to join game before match termination")]
-    public float m_GameTimerOut;
+    [SyncVar]public float m_GameTimerOut;
 
     [SerializeField]
-    private float m_Timer;
+    [SyncVar]private float m_Timer;
 
-    public bool m_GameOver;
+    [SyncVar]public bool m_GameOver;
 
     void Awake()
     {
@@ -47,14 +49,51 @@ public class GameController : NetworkBehaviour
             m_Timer += Time.deltaTime;
             if (m_Timer >= m_GameTimerOut)
             {
-                m_GameOver = true;                
+                m_GameOver = true;
+                foreach (var team in m_Teams)
+                {
+                    foreach (var player in team.m_Players)
+                    {
+                        if (player.isLocalPlayer)
+                        {
+                            m_UIController.RpcSetText("Draw", Color.yellow);
+                            m_UIController.RpcDisplayMatchEndUI(true);
+                        }
+                    }
+                }
             }
             return;
         }
+  
+        RpcVictoryCheck();
+    }
 
-        if (m_ScoreKeeper.m_OnlyOneTeamRemaining)
+    [ClientRpc]
+    void RpcVictoryCheck()
+    {
+        StartCoroutine(VictoryCheckDelay());
+    }
+
+    IEnumerator VictoryCheckDelay()
+    {
+        yield return new WaitForSeconds(2.5f);
+        if (m_ScoreKeeper.m_TeamRemaining <= 1)
         {
             m_GameOver = true;
+            foreach (var team in m_ScoreKeeper.m_TeamController.m_Teams)
+            {
+                foreach (var player in team.m_Players)
+                {
+                    if (!player.isClient || !player.isLocalPlayer)
+                        break;
+                    if (m_ScoreKeeper.m_TeamsDefeated.Contains(team))
+                        m_UIController.RpcSetText("Defeat", team.m_TeamColor);
+                    else
+                        m_UIController.RpcSetText("Victory", team.m_TeamColor);
+                    m_UIController.m_TextColor = team.m_TeamColor;
+                    m_UIController.RpcDisplayMatchEndUI(true);
+                }
+            }            
         }
     }
 }

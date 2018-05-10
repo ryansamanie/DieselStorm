@@ -8,7 +8,8 @@ public class ExtendNetworkManager : NetworkManager
     public GameEventArgs m_OnClientConnected;
     public GameEventArgs m_OnClientDisconnected;
     public TeamController m_TeamController;
-
+    public Color m_ClientTeamColor;
+    public int m_connectionId;
     public Dictionary<string,NetworkIdentity> m_Connections = new Dictionary<string, NetworkIdentity>();
 
     public int m_PlayerConnected = 0;
@@ -19,6 +20,19 @@ public class ExtendNetworkManager : NetworkManager
         {
             GetComponent<NetworkManagerHUD>().showGUI = !GetComponent<NetworkManagerHUD>().showGUI;
         }
+        if (m_TeamController != null)
+        {
+            foreach (var team in m_TeamController.m_Teams)
+            {
+                foreach (var player in team.m_Players)
+                {
+                    if (player.GetComponent<NetworkIdentity>().connectionToClient.connectionId == m_connectionId)
+                    {
+                        m_ClientTeamColor = player.m_TeamColor;
+                    }
+                }
+            }
+        }
     }
 
     //Detect when a client connects to the Server
@@ -28,6 +42,7 @@ public class ExtendNetworkManager : NetworkManager
         if (m_TeamController == null)
             StartCoroutine(SearchForController());
         StartCoroutine(ClientConnect(connection));
+        m_connectionId = connection.connectionId;
         GetComponent<NetworkManagerHUD>().showGUI = false;
     }
 

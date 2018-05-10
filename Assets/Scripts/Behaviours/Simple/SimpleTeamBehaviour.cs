@@ -12,7 +12,7 @@ public class SimpleTeamBehaviour : NetworkBehaviour
     public GameEventArgs m_PlayerRespawn;
     public bool m_PlayerOnTeam;
 
-    void Start()
+    void Awake()
     {
         m_CurrentTeamLives = m_StartingTeamLives;
     }
